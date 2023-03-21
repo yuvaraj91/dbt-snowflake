@@ -3,7 +3,6 @@ version: 2
 sources:
   - name: public
     tables:
-      - name: places
       - name: people_raw
       - name: people
       - name: dbt_people_raw
