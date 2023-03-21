@@ -11,7 +11,7 @@ def model(dbt, session):
     dbt.config(materialized="table")
     
     #df = dbt.ref("people_raw")
-    df = dbt.source('public', 'people_raw').to_pandas()
+    df = dbt.source('public', 'dbt_people_raw').to_pandas()
     df['FAMILY_NAME'] = df['FAMILY_NAME'].apply(encoding)
 
     return df

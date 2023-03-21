@@ -6,3 +6,4 @@ sources:
       - name: places
       - name: people_raw
       - name: people
+      - name: dbt_people_raw
