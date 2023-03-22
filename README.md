@@ -31,14 +31,12 @@ snowflake:
 
 First change the working directory with `cd snowflake` before running and dbt cli commands.
 
-For example, you can create a table public.people_raw by running
+For example, you can create a table public.places by running
 
 ```
-dbt seed --select people_raw
+dbt seed --select places
 ```
 
 ## Integration with Airbyte
 
 This repo was mainly used for testing the integration with Airbyte. For example, the model `people.py` runs after the "EL" part to apply the transformation on "family_name".
-
-
