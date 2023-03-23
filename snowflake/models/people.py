@@ -10,7 +10,8 @@ def encoding(x):
 def model(dbt, session):
     dbt.config(materialized="table")
     
-    df = dbt.source('public', 'people').to_pandas()
+    df = dbt.source('public', 'people_raw').to_pandas()
     df['FAMILY_NAME'] = df['FAMILY_NAME'].apply(encoding)
+    del df['GIVEN_NAME']
 
     return df
