@@ -5,3 +5,4 @@ sources:
     tables:
       - name: people
       - name: places
+      - name: people_raw
