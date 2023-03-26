@@ -12,5 +12,6 @@ def model(dbt, session):
     
     df = dbt.source('public', 'people_raw').to_pandas()
     df['FAMILY_NAME'] = df['FAMILY_NAME'].apply(encoding)
+    del df['GIVEN_NAME']
 
     return df
