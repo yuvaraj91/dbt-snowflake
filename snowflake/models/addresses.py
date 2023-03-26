@@ -1,5 +1,5 @@
 import base64
-import pandas
+import pandas as pd
 
 def encoding(x):
     x = x.encode("ascii")
@@ -11,6 +11,6 @@ def model(dbt, session):
     dbt.config(materialized="table")
     
     df = dbt.source('public', 'addresses').to_pandas()
-    df['STREET'] = df['STREET'].apply(encoding)
+    df['STREET'] = df['STREET'].apply(lambda x: encoding(x) if pd.notnull(x) else x)
 
     return df
