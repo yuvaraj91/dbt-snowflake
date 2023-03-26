@@ -4,3 +4,4 @@ sources:
   - name: public
     tables:
       - name: people_raw
+      - name: addresses
