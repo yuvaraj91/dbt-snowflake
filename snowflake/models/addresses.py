@@ -2,9 +2,9 @@ import base64
 import pandas as pd
 
 def encoding(x):
-    x = x.encode('ascii')
+    x = x.encode('ascii', 'ignore')
     base64_bytes = base64.b64encode(x)
-    return base64_bytes.decode('ascii', 'ignore')
+    return base64_bytes.decode('ascii')
     
     
 def model(dbt, session):
