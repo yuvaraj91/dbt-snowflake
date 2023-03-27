@@ -5,3 +5,11 @@ sources:
     tables:
       - name: people_raw
       - name: addresses
+
+models:
+  - name: addresses
+    config:
+      materialized: incremental
+      unique_key: photographer_id
+      incremental_strategy: merge
+      merge_update_columns: ['street']
