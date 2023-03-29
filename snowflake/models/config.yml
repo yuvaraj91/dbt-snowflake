@@ -9,7 +9,4 @@ sources:
 models:
   - name: addresses
     config:
-      materialized: incremental
-      unique_key: photographer_id
-      incremental_strategy: merge
-      merge_update_columns: ['street']
+      delta_hours: '5 DAY'
