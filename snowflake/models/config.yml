@@ -1,0 +1,12 @@
+version: 2
+
+sources:
+  - name: public
+    tables:
+      - name: people_raw
+      - name: addresses
+
+models:
+  - name: addresses
+    config:
+      delta_hours: '5 DAY'
