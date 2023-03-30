@@ -2,11 +2,20 @@ version: 2
 
 sources:
   - name: public
+    description: Replica of the RDS MySQL database loaded by Airbyte
     tables:
-      - name: people_raw
       - name: addresses
+        description: Contains addresses of the photographers
+      - name: people_raw
 
 models:
   - name: addresses
     config:
-      delta_hours: '5 DAY'
+      delta_hours: '1 DAY'
+      timestamp_column: '_airbyte_emitted_at'
+      tags: ['gdpr', 'pii']
+    columns:
+      - name: id
+        tests:
+          - unique
+          - not_null
