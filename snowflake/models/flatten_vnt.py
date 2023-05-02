@@ -1,4 +1,3 @@
-import base64
 from snowflake.snowpark.functions import any_value    
     
 def model(dbt, session):
