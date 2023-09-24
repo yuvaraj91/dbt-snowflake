@@ -1,4 +1,1 @@
-dbt-snowflake==1.4.2
-pandas==1.5.3
-pyarrow==11.0.0
-
+dbt-metricflow[snowflake]==0.0.5

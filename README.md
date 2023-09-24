@@ -37,6 +37,38 @@ For example, you can create a table public.places by running
 dbt seed --select places
 ```
 
-## Integration with Airbyte
+## Install Metricflow
 
-This repo was mainly used for testing the integration with Airbyte. For example, the model `people.py` runs after the "EL" part to apply the transformation on "family_name".
+Install metricflow, et al within a virtual environment:
+```shell
+python -m venv .venv
+source .venv/bin/activate
+pip install "dbt-metricflow[snowflake]"
+dbt --version
+mf --version
+```
+
+## Test the connection
+1. Update the `profile` within `dbt_project.yml` to refer to one of your pre-existing profile
+
+```shell
+dbt debug
+```
+
+## Load data
+
+```shell
+dbt deps
+```
+
+## Run your dbt project, and query metrics
+
+```shell
+dbt build --exclude path:jaffle-data
+mf validate-configs
+mf query --metrics aov_eur
+mf query --metrics aov_eur --explain
+```
+
+
+
