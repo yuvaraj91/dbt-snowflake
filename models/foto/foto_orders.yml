@@ -128,3 +128,15 @@ metrics:
           alias: min
         - name: max_total_eur
           alias: max
+  - name: ratio_usd_currency
+    description: Ratio of USD order amount per total order amonunt in eur
+    type: ratio
+    label: ratio usd currency
+    type_params:
+      numerator:
+        name: sum_total_eur
+        filter: |
+            {{ Dimension('id__currency') }} = 'USD'
+        alias: usd_sum_total_eur
+      denominator:
+        name: sum_total_eur
