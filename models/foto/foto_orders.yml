@@ -56,6 +56,18 @@ semantic_models:
         description: distinct count of coupons used
         expr: coupon_id
         agg: count_distinct
+      - name: min_total_eur
+        description: the minimum order amount in eur
+        expr: sum_total_eur
+        agg: min
+      - name: max_total_eur
+        description: the maximum order amount in eur
+        expr: sum_total_eur
+        agg: max
+      - name: avg_total_eur
+        description: the average order amount in eur
+        expr: sum_total_eur
+        agg: average
 
 metrics:
   - name: sum_total_eur
@@ -87,10 +99,32 @@ metrics:
           alias: value
         - name: count_orders
           alias: orders
-  - name: ratio_usd_currency
-    description: Ratio of USD order amount per total order amonunt in eur
-    type: ratio
-    label: ratio usd currency
+  - name: avg_total_eur
+    description: average order amonunt in eur
+    type: simple
+    label: avg total eur
     type_params:
-      numerator: sum_total
-      denominator: sum_total_eur
+      measure: avg_total_eur
+  - name: min_total_eur
+    description: Minimum order amonunt in eur
+    type: simple
+    label: min total eur
+    type_params:
+      measure: min_total_eur
+  - name: max_total_eur
+    description: Maximum order amonunt in eur
+    type: simple
+    label: max total eur
+    type_params:
+      measure: max_total_eur
+  - name: order_value_range_eur
+    description: Order value range in eur
+    type: derived
+    label: order value range eur
+    type_params:
+      expr: max - min
+      metrics:
+        - name: min_total_eur
+          alias: min
+        - name: max_total_eur
+          alias: max
