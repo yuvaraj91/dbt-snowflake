@@ -87,3 +87,10 @@ metrics:
           alias: value
         - name: count_orders
           alias: orders
+  - name: ratio_usd_currency
+    description: Ratio of USD order amount per total order amonunt in eur
+    type: ratio
+    label: ratio usd currency
+    type_params:
+      numerator: sum_total
+      denominator: sum_total_eur
