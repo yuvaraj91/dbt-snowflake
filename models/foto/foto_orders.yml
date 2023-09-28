@@ -142,9 +142,31 @@ metrics:
         alias: usd_gmv_eur
       denominator:
         name: gmv_eur
-  - name: rolling_gmv_eur
+  - name: cumulative_gmv_eur
     type: cumulative
     label: rolling gmv eur per year
     type_params:
       measure: gmv_eur
       window: 1 year
+  - name: cumulative_gmv_eur_2022
+    type: cumulative
+    label: rolling gmv eur per year
+    type_params:
+      measure: gmv_eur
+      window: 1 year
+    filter: |
+        {{ TimeDimension('id__created', 'year') }} = '2022-01-01'
+  - name: cumulative_gmv_eur_mtd   # For this metric, we use a monthly grain to date 
+    label: Cumulative GMV EUR (MTD)
+    description: The month to date gmv in eur
+    type: cumulative
+    type_params:
+      measure: gmv_eur
+      grain_to_date: month
+  - name: cumulative_gmv_eur_l1m  # For this metric, we use a window of 1 month 
+    label: Cumulative GMV EUR (L1M)
+    description: Trailing 1 month cumulative gmv
+    type: cumulative
+    type_params:
+      measure: gmv_eur
+      window: 1 month
