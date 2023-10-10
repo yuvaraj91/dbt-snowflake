@@ -70,5 +70,14 @@ mf query --metrics aov_eur
 mf query --metrics aov_eur --explain
 ```
 
+# Query the Semantic Layer from Python
 
+- Build the project requirements by running `python -m pip install path/to/project`
+- Add the environment variable to your path (bash / .zshrc) file
+export DBT_JDBC_URL="<token here>"
 
+Sample run command:
+
+```
+python src/adbc_example.py 'select * from {{ semantic_layer.query(metrics=["downsell_2023"]) }}'
+```
