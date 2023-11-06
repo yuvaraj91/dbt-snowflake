@@ -12,8 +12,8 @@ with prev_year as (
       SUM(CASE WHEN ii.item_type = 'order_commission' THEN ii.total_net_eur ELSE 0 END) AS order_commission,
       SUM(CASE WHEN ii.item_type IN ('printservice_production', 'printservice_shipping') THEN ii.total_net_eur ELSE 0 END) AS photo_labs,
       SUM(CASE WHEN ii.item_type = 'photo_editing' THEN ii.total_net_eur ELSE 0 END) AS photo_editing
-    FROM LOCAL.PUBLIC.invoices i
-    LEFT JOIN LOCAL.PUBLIC.invoices_items ii ON i.id = ii.invoice_id
+    FROM LOCAL.SEMANTIC_LAYER.invoices i
+    LEFT JOIN LOCAL.SEMANTIC_LAYER.invoices_items ii ON i.id = ii.invoice_id
     WHERE ii.item_type IN ('hosting', 'order_commission', 'printservice_production', 'printservice_shipping', 'photo_editing')
       -- AND YEAR(i.invoice_date) < 2022
       AND i.photographer_id IS NOT NULL
@@ -33,7 +33,7 @@ became_churn as (
           MAX(plcsc.transition_date) AS date,
           1 AS users
         FROM
-          LOCAL.PUBLIC.photographers_stage_changes plcsc
+          LOCAL.SEMANTIC_LAYER.photographers_stage_changes plcsc
         WHERE
           plcsc.new_stage_id = 5
         GROUP BY
@@ -52,7 +52,7 @@ became_new as (
           MAX(plcsc.transition_date) AS date,
           1 AS users
         FROM
-          LOCAL.PUBLIC.photographers_stage_changes plcsc
+          LOCAL.SEMANTIC_LAYER.photographers_stage_changes plcsc
         WHERE
           plcsc.new_stage_id = 2
         GROUP BY
@@ -79,13 +79,13 @@ calculate_type as (
             ELSE 'upsell'
         END as user_status,
         IFNULL(prev_year.total,0) as prev_total
-    from LOCAL.PUBLIC.photographers_per_month plcsm
-    inner JOIN LOCAL.PUBLIC.invoices i
+    from LOCAL.SEMANTIC_LAYER.photographers_per_month plcsm
+    inner JOIN LOCAL.SEMANTIC_LAYER.invoices i
         ON i.photographer_id = plcsm.photographer_id 
         AND TO_CHAR(i.invoice_date, 'MM-YYYY') = TO_CHAR(plcsm.monthend_date, 'MM-YYYY')
-    LEFT JOIN LOCAL.PUBLIC.invoices_items ii 
+    LEFT JOIN LOCAL.SEMANTIC_LAYER.invoices_items ii 
         ON i.id = ii.invoice_id
-    LEFT JOIN LOCAL.PUBLIC.photographers_current plcs 
+    LEFT JOIN LOCAL.SEMANTIC_LAYER.photographers_current plcs 
         ON plcsm.photographer_id = plcs.photographer_id
     LEFT JOIN prev_year
         ON plcsm.photographer_id = prev_year.pid and (YEAR(plcsm.monthend_date)-1) = prev_year.revenue_year
@@ -120,15 +120,15 @@ grr as (
         type.user_status,
         SUM(CASE WHEN ii.item_type IN ('hosting', 'order_commission', 'printservice_production', 'printservice_shipping', 'photo_editing') THEN ii.total_net_eur ELSE 0 END) AS total,
         type.prev_total
-    FROM LOCAL.PUBLIC.photographers_per_month plcsm
-    LEFT JOIN LOCAL.PUBLIC.invoices i 
+    FROM LOCAL.SEMANTIC_LAYER.photographers_per_month plcsm
+    LEFT JOIN LOCAL.SEMANTIC_LAYER.invoices i 
         ON i.photographer_id = plcsm.photographer_id 
         AND TO_CHAR(i.invoice_date, 'MM-YYYY') = TO_CHAR(plcsm.monthend_date, 'MM-YYYY')
-    LEFT JOIN LOCAL.PUBLIC.invoices_items ii 
+    LEFT JOIN LOCAL.SEMANTIC_LAYER.invoices_items ii 
         ON i.id = ii.invoice_id
-    LEFT JOIN LOCAL.PUBLIC.photographers p 
+    LEFT JOIN LOCAL.SEMANTIC_LAYER.photographers p 
         ON plcsm.photographer_id = p.id
-    LEFT JOIN LOCAL.PUBLIC.photographers_current plcs 
+    LEFT JOIN LOCAL.SEMANTIC_LAYER.photographers_current plcs 
         ON plcsm.photographer_id = plcs.photographer_id
     LEFT JOIN calculate_type type
         ON p.id = type.photographer_id
