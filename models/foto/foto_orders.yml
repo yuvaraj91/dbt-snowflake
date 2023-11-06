@@ -150,7 +150,7 @@ metrics:
       window: 1 year
   - name: cumulative_gmv_eur_2022
     type: cumulative
-    label: rolling gmv eur per year
+    label: rolling gmv eur per year 2022
     type_params:
       measure: gmv_eur
       window: 1 year
