@@ -1,12 +1,9 @@
 version: 2
 
-sources:
-  - name: public
-    tables:
-      - name: vnt
-
 models:
   - name: flatten_vnt
     config:
       schema: public
-
+  - name: stg_customer
+    config:
+      schema: public

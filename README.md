@@ -2,6 +2,7 @@
 
 Testing dbt with the Snowflake 30-day free trial
 
+- Using the sample data provided in the TPCH_SF1 schema.
 - Dbt Semantic layer via MetricFlow
 - CI/CD pipeline in GitHub Actions
 
@@ -60,9 +61,23 @@ dbt debug
 
 ## Load data
 
+Based on the Snowflake sample data in the TPCH_SF1 schema.
+
 ```shell
 dbt deps
+dbt build
 ```
+
+## Documentation and lineage
+
+```shell
+make dbt-docs
+```
+
+Spins up a local container to serve the dbt docs in a web-browser - `localhost:8081`.
+Under the hood executes `dbt docs generate` and `dbt docs serve`.
+
+## Semantic Layer and MetricFlow
 
 ## Run your dbt project, and query metrics
 
