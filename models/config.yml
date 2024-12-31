@@ -9,8 +9,4 @@ models:
   - name: flatten_vnt
     config:
       schema: public
-    #columns:
-    #  - name: id
-    #    tests:
-    #      - unique
-    #      - not_null
+
