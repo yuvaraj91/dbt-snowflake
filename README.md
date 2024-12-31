@@ -31,6 +31,14 @@ snowflake:
   target: dev
 ```
 
+## Test the connection
+
+Update the `profile` within `dbt_project.yml` to refer to one of your pre-existing profile
+
+```shell
+dbt debug
+```
+
 ## Running dbt locally
 
 For example, you can create a table public.places by running
@@ -39,32 +47,28 @@ For example, you can create a table public.places by running
 dbt seed --select places
 ```
 
-## Install Metricflow
-
-Install metricflow, et al within a virtual environment:
-
-```shell
-python -m venv .venv
-source .venv/bin/activate
-dbt --version
-mf --version
-```
-
-## Test the connection
-
-1. Update the `profile` within `dbt_project.yml` to refer to one of your pre-existing profile
-
-```shell
-dbt debug
-```
-
 ## Load data
 
 ```shell
 dbt deps
 ```
 
+<<<<<<< Updated upstream
 ## Run your dbt project, and query metrics
+=======
+## Documentation and lineage
+
+```shell
+make dbt-docs
+```
+
+Spins up a local container to serve the dbt docs in a web-browser - `localhost:8081`.
+Under the hood executes `dbt docs generate` and `dbt docs serve`.
+
+# Semantic Layer and MetricFlow
+
+*Run your dbt project, and query metrics*
+>>>>>>> Stashed changes
 
 ```shell
 dbt build --exclude path:jaffle-data
@@ -73,7 +77,7 @@ mf query --metrics revenue
 mf query --metrics revenue --explain
 ```
 
-# Query the Semantic Layer from Python
+**Query the Semantic Layer from Python*
 
 - Build the project requirements by running `python -m pip install path/to/project`
 - Add the environment variable to your path (bash / .zshrc) file
