@@ -1,0 +1,59 @@
+version: 2
+
+sources:
+  - name: sample
+    schema: tpch_sf1
+    database: snowflake_sample_data  
+    tables:
+      
+      - name: customer
+      
+        columns:
+          - name: c_custkey
+            tests:
+              - unique
+              - not_null
+          - name: c_name
+            tests:
+              - not_null
+      
+      - name: orders
+      
+        columns:
+          - name: o_orderkey
+            tests:
+              - unique
+              - not_null
+          - name: o_custkey
+            tests:
+              - not_null
+          - name: o_orderdate
+            tests:
+              - not_null
+          - name: o_totalprice
+            tests:
+              - not_null
+
+      - name: lineitem
+       
+        columns:
+          - name: l_orderkey
+            tests:
+              - not_null
+          - name: l_quantity
+            tests:
+              - not_null
+          - name: l_linenumber
+            tests:
+              - not_null  
+              
+      - name: nation 
+      
+        columns:
+          - name: n_nationkey
+            tests:
+              - unique
+              - not_null
+          - name: n_name
+            tests:
+              - not_null

@@ -8,3 +8,7 @@ init-venv: clean-venv
 	virtualenv venv --python=python3.9; \
 	. ./venv/bin/activate; \
 	pip3 install -r requirements.txt;
+
+.PHONY: dbt-docs
+dbt-docs:
+	dbt docs generate && dbt docs serve --port 8081;
