@@ -61,6 +61,17 @@ dbt debug
 dbt deps
 ```
 
+## Documentation and lineage
+
+```shell
+make dbt-docs
+```
+
+Spins up a local container to serve the dbt docs in a web-browser - `localhost:8081`.
+Under the hood executes `dbt docs generate` and `dbt docs serve`.
+
+## Semantic Layer and MetricFlow
+
 ## Run your dbt project, and query metrics
 
 ```shell
