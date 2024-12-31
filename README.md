@@ -57,36 +57,18 @@ dbt deps
 dbt build
 ```
 
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
 ## Documentation and lineage
-
-```shell
-make dbt-docs
-```
 
 Spins up a local container to serve the dbt docs in a web-browser - `localhost:8081`.
 Under the hood executes `dbt docs generate` and `dbt docs serve`.
 
-## Semantic Layer and MetricFlow
-
->>>>>>> f777259faa755f9274a823b424ade5e550e9bcca
-## Run your dbt project, and query metrics
-=======
-## Documentation and lineage
-
 ```shell
 make dbt-docs
 ```
-
-Spins up a local container to serve the dbt docs in a web-browser - `localhost:8081`.
-Under the hood executes `dbt docs generate` and `dbt docs serve`.
 
 # Semantic Layer and MetricFlow
 
-*Run your dbt project, and query metrics*
->>>>>>> Stashed changes
+- Run your dbt project, and query metrics*
 
 ```shell
 dbt build --exclude path:jaffle-data
@@ -95,11 +77,12 @@ mf query --metrics revenue
 mf query --metrics revenue --explain
 ```
 
-**Query the Semantic Layer from Python*
+- Query the Semantic Layer from Python
 
-- Build the project requirements by running `python -m pip install path/to/project`
-- Add the environment variable to your path (bash / .zshrc) file
-export DBT_JDBC_URL="<token here>"
+Build the project requirements by running `python -m pip install path/to/project`
+Add the environment variable to your path (bash / .zshrc) file
+
+`export DBT_JDBC_URL="<token here>"`
 
 Sample run command:
 
