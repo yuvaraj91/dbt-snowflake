@@ -133,4 +133,4 @@ dmypy.json
 target/
 dbt_packages/
 logs/
-
+.user.yml
