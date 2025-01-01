@@ -1,9 +1,6 @@
 version: 2
 
 models:
-  - name: flatten_vnt
-    config:
-      schema: public
   - name: stg_customer
     config:
       schema: public
